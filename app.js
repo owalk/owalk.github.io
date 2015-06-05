@@ -1,15 +1,27 @@
 var App = angular.module('App', []);
 
+App.factory('userFactory', userFactory);
 
-App.factory('sortLast',function() {
-return 'last';
-//im still a little fuzzy on how to actually use factories
-//but I think I need to get the value passed to the controller
-//and then use the factory as a sort of constructor for the function
-});
+function userFactory() {
 
- 
-App.controller('appCtrl', function($scope, $http) {
+    function _load() {
+        // load logic here
+        _users = [ { first: 'jay', last: 'desm' } ];
+    }
+
+
+    // some private variables
+    var _users = [];
+    var _service {
+        // model data
+        model: { users: _users },
+        load:  _load
+    }
+    return _service; // exposes _service which contains references
+}
+
+
+App.controller('appCtrl',['$scope','$http', function($scope, $http) {
 
     $http.get('list.json')
         .then(function(res){
@@ -40,4 +52,4 @@ $scope.reload = function() {
     else
         $scope.button= {text:"load"};
 }
-});
+}]);
