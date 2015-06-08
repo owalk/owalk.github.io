@@ -19,13 +19,12 @@ App.factory('userFactory', ['$http', function($http) {
                  });
          },
          
-         first :  {order : "fast"},
+         first :  {order : "first"},
 
          last : {order: "last"},
 
          reOrder : {order: ""}
          }
-         
      
 }]);
 
