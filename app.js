@@ -1,51 +1,53 @@
 var App = angular.module('App', []);
 
-App.factory('userFactory', function() {
+App.factory('userFactory', ['$http', function($http) {
 
-    // some private variables
+    // private variables
     var _users = [];
-/*
-  //I want to use this but it was giving errors about a semi colon when i had it included?
-    var _service {
-       // model data
-       model: { users: _users },
-       load:  _load
-    };
-*/   
 
-     function _load() {
-        // load logic here
-     var users = [  { first: "john", last: "doe" } ];
-        //once this is working, get data from external find.
-}
-     return users; // exposes _service which contains references
-});
+     return {
+         // model data
+         model: { users: _users },
+         
+         load : function() {
+             // load logic here
+
+             $http.get('list.json')
+                 .then(function(res){
+                     for (var i = 0; i < res.data.length; i++)
+                      _users.push(res.data[i]);
+                 });
+         },
+         
+         first :  {order : "fast"},
+
+         last : {order: "last"},
+
+         reOrder : {order: ""}
+         }
+         
+     
+}]);
 
 
-App.controller('appCtrl',['$scope','$http', function($scope, $http) {
+App.controller('appCtrl',['userFactory', '$scope', function(userFactory, $scope) {
 
-    $http.get('list.json')
-        .then(function(res){
-            $scope.list = res.data;
-        });
-
-//I think this line isn't correct, so keeping it as a comment till i figure out syntax.
-//$scope.list = userFactory.users;
+userFactory.load();
+$scope.list = userFactory.model.users;
 
 $scope.showBool = false;
 $scope.button= {text:"load"};
 
 $scope.sortFirst = function() {
-    $scope.sortOrder = 'first';
-}
-
-$scope.reOrder = function() {
-    $scope.sortOrder = 'reorder';
+    $scope.sortOrder = userFactory.first.order;
 }
 
 $scope.sortLast = function() {
-    
-    $scope.sortOrder = 'last';
+    $scope.sortOrder = userFactory.last.order;
+}
+
+$scope.reOrder = function() {
+    $scope.sortOrder = userFactory.reOrder.order;
 }
 
 $scope.reload = function() {

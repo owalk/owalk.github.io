@@ -1,4 +1,4 @@
-[ 
+[
     { 
         "first":"Oliver", 
         "last":"Walker" 
@@ -27,7 +27,7 @@
         "first":"Patrick", 
         "last":"Star"
     },
-    { 
+    {
         "first":"Agent", 
         "last":"Smith"
     },
@@ -38,5 +38,5 @@
     { 
         "first":"Hannibal", 
         "last":"Lecter"
-    } 
+    }
 ]

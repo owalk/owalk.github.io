@@ -3,12 +3,10 @@
 <head>
   <meta charset="utf-8">
   <title>app</title>
-  <script>document.write("<base href=\"" + document.location + "\" />");</script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
   <script src="app.js"></script>
 </head>
 <body ng-controller="appCtrl">
-
   <button type="button" ng-click="reload()"> {{button.text}} </button>
 
   <div ng-show="showBool">
@@ -16,7 +14,7 @@
     <button type="button" ng-click="sortLast()">Sort by last name </button>
     <button type="button" ng-click="reOrder()">Restore order </button>
 
-    <ol>
+ <ol>
       <div ng-switch on="sortOrder">
 
        <div ng-switch-when="first">
